@@ -1,0 +1,72 @@
+<ion-content no-padding>
+  <ion-item>
+    <ion-label>Top Category</ion-label>
+    <ion-label slot="end" (click)="gotoCategory()">View All</ion-label>
+  </ion-item>
+  <ion-slides>
+      <ion-slide *ngFor="let pages of categoryPages">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4" *ngFor="let category of pages" (click)="categoryClick(category)">
+              <ion-card no-padding no-margin>
+                <ion-card-header style="margin-top:0px; margin-left:0px; margin-right:0px; padding-top:0px; padding-right:0px; padding-left:0px">
+                  <img [src]="category.Image">
+                  <ion-card-subtitle>{{category.Name}}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-slide>
+    </ion-slides>
+
+  <ion-item>
+    <ion-label>Top Service</ion-label>
+    <ion-label slot="end" (click)="gotoService()">View All</ion-label>
+  </ion-item>
+  <ion-slides>
+    <ion-slide *ngFor="let pages of servicePages" (click)="serviceClick(service)">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="4" *ngFor="let service of pages">
+            <ion-card no-padding no-margin>
+              <ion-card-header>
+                <ion-card-subtitle>{{service.Name}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-item>
+    <ion-label>IT Freelancer By Ranking</ion-label>
+    <ion-label slot="end" (click)="gotoProvider()">View All</ion-label>
+  </ion-item>
+  <ion-slides>
+    <ion-slide *ngFor="let pages of userPages" (click)="userClick(user)">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="4" *ngFor="let user of pages">
+            <ion-card no-padding no-margin>
+              <ion-card-header style="margin-top:0px; margin-left:0px; margin-right:0px; padding-top:0px; padding-right:0px;
+                padding-left:0px">
+                <img [src]="user.Image">
+                <ion-card-subtitle>{{user.Name}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar (click)="presentActionSheet()">
+    <ion-button expand="full" icon-only clear outline item-center>
+      <ion-icon name="ios-arrow-down"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

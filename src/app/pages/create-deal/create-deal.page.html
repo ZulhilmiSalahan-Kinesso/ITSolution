@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">Make Deal</ion-text>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="back()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="filing" item-start></ion-icon>
+      From
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="deal.From"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="filing" item-start></ion-icon>
+      To
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="deal.To"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="filing" item-start></ion-icon>
+      Title
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="deal.Title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="filing" item-start></ion-icon>
+      Description
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="deal.Description"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="filing" item-start></ion-icon>
+      Offer
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="deal.Offer"></ion-input>
+  </ion-item>
+
+  <ion-tab-button (click)="addDeal()">
+    <ion-icon name="add"></ion-icon>
+    <ion-label>Add</ion-label>
+  </ion-tab-button>
+</ion-content>

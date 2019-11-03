@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">Update Profile</ion-text>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="back()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="contact" item-start></ion-icon>
+      Name
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="image" item-start></ion-icon>
+      Image
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.Image"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="mail" item-start></ion-icon>
+      Email
+    </ion-label>
+    <ion-input [disabled]="true" color="secondary" type="text" [(ngModel)]="user.Email"></ion-input>
+  </ion-item>
+    <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="call" item-start></ion-icon>
+      Phone Number
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.PhoneNumber"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="document" item-start></ion-icon>
+      Occupation
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.Occupation"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="pin" item-start></ion-icon>
+      Location
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.Location"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="contacts" item-start></ion-icon>
+      CustomerCount
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.CustomerCount"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="heart" item-start></ion-icon>
+      InterestedField
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.InterestedField"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">
+      <ion-icon name="filing" item-start></ion-icon>
+      ProjectInvolved
+    </ion-label>
+    <ion-input color="secondary" type="text" [(ngModel)]="user.ProjectInvolved"></ion-input>
+  </ion-item>
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="updateUser()">
+      Update Profile
+    </ion-button>
+</ion-content>

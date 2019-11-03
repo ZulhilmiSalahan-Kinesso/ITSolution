@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button color="secondary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-text color="light">
+        <ion-text color="light" class="fw700">IT Service Request</ion-text>
+      </ion-text>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button size="small" shape="round" color="medium" (click)="back()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let deal of filteredDeals">
+      <ion-item>
+        <ion-label>
+          Title: {{deal.Title}} <br />
+          Desc: {{deal.Description}} <br />
+          Status : {{deal.Status}}
+        </ion-label>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-no-padding">
+            <ion-col size="4" class="ion-no-padding">
+              <ion-button expand="full" size="default" (click)="acceptDeal(deal)">
+                Accept
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-no-padding">
+              <ion-button expand="full" size="default" (click)="rejectDeal(deal)">
+                Reject
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-no-padding">
+                <ion-button expand="full" size="default" (click)="generateReceipt(deal)">
+                  Receipt
+                </ion-button>
+              </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

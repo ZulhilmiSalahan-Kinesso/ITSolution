@@ -1,5 +1,7 @@
 {
-  "name": "ITSolution",
-  "integrations": {},
+  "name": "ITHub",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button color="secondary"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <ion-text color="light">
+          <ion-text color="light" class="fw700">Register</ion-text>
+        </ion-text>
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button size="small" shape="round" color="medium" (click)="back()">
+          <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="tryRegister(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Password</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Confirm Password</ion-label>
+      <ion-input type="password" formControlName="confirm_password" class="form-controll" required></ion-input>
+    </ion-item>
+    
+    <p text-center tappable (click)="forgotPass()">
+        <ion-text color="light">
+          <strong>By clicking register you agree with our terms and conditions</strong>
+        </ion-text>
+      </p>
+
+    <div>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable class="submit-btn" type="submit" [disabled]="!validations_form.valid">
+          <ion-icon name="log-in"></ion-icon>
+          Register
+        </ion-button>
+        </div>
+    
+    <label class="error-message">{{errorMessage}}</label>
+    <label class="success-message">{{successMessage}}</label>
+  </form>
+  
+  <div text-center margin-top>
+      <span (click)="goLoginPage()" class="paz" tappable>
+        <ion-text color="light">
+            Already have an account? <strong>Try to Log In.</strong>
+        </ion-text>
+      </span>
+    </div>
+
+</ion-content>

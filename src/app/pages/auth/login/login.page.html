@@ -1,0 +1,124 @@
+<ion-content padding class="animated fadeIn login auth-page" *ngIf="authService.userDetails() === null">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo" style="height:150px"></div>
+      <h4 no-margin>
+        <ion-text color="light" class="fw700">
+          IT Solution
+        </ion-text>
+      </h4>
+    </div>
+
+    <form class="form" [formGroup]="validations_form" (ngSubmit)="loginUser(validations_form.value)">
+
+      <ion-item>
+        <ion-label position="floating" color="primary">
+          <ion-icon name="mail" item-start></ion-icon>
+          Email
+        </ion-label>
+        <ion-input color="secondary" type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">
+          <ion-icon name="lock" item-start></ion-icon>
+          Password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <p text-right tappable (click)="forgotPass()" class="paz">
+        <ion-text color="light">
+          <strong>Forgot Password?</strong>
+        </ion-text>
+      </p>
+
+      <div>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable type="submit"
+          [disabled]="!validations_form.valid">
+          <ion-icon name="log-in"></ion-icon>
+          Signin
+        </ion-button>
+
+        <!--
+        <p text-center>
+          <ion-text color="light">
+            Or Signin with:
+          </ion-text>
+        </p>
+
+        <ion-grid class="btn-group">
+          <ion-row>
+            <ion-col size="4">
+              <ion-button shape="round" expand="full" color="secondary">
+                <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button shape="round" expand="full" color="secondary">
+                <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="4">
+              <ion-button shape="round" expand="full" color="secondary">
+                <ion-icon slot="icon-only" name="logo-googleplus"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        -->
+
+      </div>
+      <label class="error-message">{{errorMessage}}</label>
+    </form>
+    <!-- Other links -->
+    <div text-center margin-top>
+      <span (click)="goToRegisterPage()" class="paz" tappable>
+        <ion-text color="light">
+          New here? <strong>Sign Up</strong>
+        </ion-text>
+      </span>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content padding *ngIf="authService.userDetails() !== null">
+  <ion-item (click)="showServiceList()">
+    <ion-label>{{authService.userDetails().email}}</ion-label>
+  </ion-item>
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="gotoProfile()">
+    <ion-icon name="person"></ion-icon>
+    Profile
+  </ion-button>
+   <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="gotoMyServices()">
+    <ion-icon name="filing"></ion-icon>
+    My Services
+  </ion-button>
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="gotoServiceRequest()">
+    <ion-icon name="filing"></ion-icon>
+    IT Service Request
+  </ion-button>
+  <!--
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="gotoMessaging()">
+    <ion-icon name="chatbubbles"></ion-icon>
+    Messaging
+  </ion-button>
+  -->
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="gotoNotifications()">
+    <ion-icon name="notifications"></ion-icon>
+    Notifications
+  </ion-button>
+  <!--
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="gotoSettings()">
+    <ion-icon name="hammer"></ion-icon>
+    Settings
+  </ion-button>
+  -->
+  <ion-button icon-left size="medium" expand="full" shape="round" color="dark" tappable (click)="logout()">
+    <ion-icon name="log-out"></ion-icon>
+    Sign Out
+  </ion-button>
+</ion-content>
