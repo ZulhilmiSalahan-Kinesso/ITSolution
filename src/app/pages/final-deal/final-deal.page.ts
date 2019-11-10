@@ -27,6 +27,7 @@ export class FinalDealPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(param => {
       this.deal = this.router.getCurrentNavigation().extras.state.Deal;
+      this.deal.ChangeDate = new Date().toLocaleString
     });
   }
 

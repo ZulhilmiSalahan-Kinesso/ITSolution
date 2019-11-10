@@ -6,5 +6,5 @@ export class Deal {
     From: string;
     To: string;
     Status: string;
-    ChangeDate: number;
+    ChangeDate: any;
 }

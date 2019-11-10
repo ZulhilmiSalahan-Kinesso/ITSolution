@@ -56,14 +56,14 @@ export class ITServiceRequestPage implements OnInit {
 
   acceptDeal(deal: Deal) {
     deal.Status = 'Accepted';
-    deal.ChangeDate = Date.now();
+    deal.ChangeDate = new Date().toLocaleString();
     this.firebaseService.updateDeal(deal.Id, deal);
     this.toastService.presentToast('Deal Accepted');
   }
 
    rejectDeal(deal: Deal) {
      deal.Status = 'Rejected';
-     deal.ChangeDate = Date.now();
+     deal.ChangeDate = new Date().toLocaleString();
      this.firebaseService.updateDeal(deal.Id, deal);
      this.toastService.presentToast('Deal Rejected');
    }
