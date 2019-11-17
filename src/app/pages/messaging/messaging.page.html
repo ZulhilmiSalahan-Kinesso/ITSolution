@@ -17,6 +17,9 @@
   </ion-header>
 
 <ion-content>
+  <ion-button (click)="sendNotification()">
+    Send Notification
+  </ion-button>
   <ion-list>
     <ion-item-sliding *ngFor="let message of messageService.messageList">
       <ion-item>

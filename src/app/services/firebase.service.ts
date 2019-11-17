@@ -9,6 +9,7 @@ import { Provider } from '../models/provider';
 import { User } from '../models/user';
 import { Listing } from '../models/listing';
 import { Message } from '../models/message';
+import { Notification } from '../models/notification';
 import { element } from 'protractor';
 import { CategoryService } from './category.service';
 import { ServiceService } from './service.service';
@@ -17,6 +18,7 @@ import { UserService } from './user.service';
 import { MessageService } from './message.service';
 import { Deal } from '../models/deal';
 import { DealService } from './deal.service';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,8 @@ export class FirebaseService {
   public deals: Observable<Deal[]>;
   public dealsArray: Deal[];
 
+  public tokenCollection: AngularFirestoreCollection<Notification>;
+
   /*
   public itemsCollection: AngularFirestoreCollection<Item>;
   public usersDocument: AngularFirestoreDocument<MyUser>;
@@ -58,6 +62,8 @@ export class FirebaseService {
   */
 
   constructor(
+    private toastService: ToastService,
+    private fcm: FCM,
     private db: AngularFirestore,
     private categoryService: CategoryService,
     private serviceService: ServiceService,
@@ -73,6 +79,7 @@ export class FirebaseService {
     this.providerCollection = this.db.collection('users');
     this.userCollection = this.db.collection('users');
     this.dealCollection = this.db.collection('deals');
+    this.tokenCollection = this.db.collection('tokens');
 
     /*
     this.usersDocument = this.db.collection( 'users' ).doc<MyUser>(this.userId);
@@ -88,6 +95,21 @@ export class FirebaseService {
     this.getDealsFromFirestore();
   }
 
+  async registerDeviceToken(userId) {
+    this.fcm.getToken().then(token => {
+      this.toastService.presentToast(token);
+
+      const notification: Notification = {
+        Title: '',
+        Body: '',
+        Token: token
+      }
+
+      this.userCollection.doc(userId).update({Token: token});
+    }, err => {
+      this.toastService.presentToast(err);
+    });
+  }
   // ##############################################################
   // Get Item From Firestore Collection
   // ##############################################################

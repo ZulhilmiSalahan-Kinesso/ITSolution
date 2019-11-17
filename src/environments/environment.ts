@@ -12,6 +12,9 @@ export const environment = {
     storageBucket: '',
     messagingSenderId: '304813647342',
     appId: '1:304813647342:web:046f5b0a9eb586eb'
+  },
+  api: {
+    url: 'https://us-central1-itsolution-9e9a9.cloudfunctions.net'
   }
 };
 

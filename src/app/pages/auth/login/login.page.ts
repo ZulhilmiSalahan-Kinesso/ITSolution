@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
   errorMessage: string = '';
 
   constructor(
+    private messageService: MessageService,
     private navCtrl: NavController,
     private authService: AuthService,
     private toastService: ToastService,
@@ -107,5 +109,10 @@ export class LoginPage implements OnInit {
 
   getUser() {
     console.log(this.authService.userDetails());
+  }
+
+  registerToken() {
+    const userId = this.authService.userDetails().uid;
+    this.firebaseService.registerDeviceToken(userId);
   }
 }
