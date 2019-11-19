@@ -111,7 +111,7 @@ export class ITProviderPage implements OnInit {
 
       console.log(this.message);
       this.firebaseService.addMessage(this.message);
-      window.open('https://api.whatsapp.com/send?phone=6' + phoneNumber, '_blank');
+      window.open('https://api.whatsapp.com/send?phone=6' + phoneNumber + '&text=Hi! I Would like to get enquiry for a specific IT Request from IT Hub Mobile Application, can we further dicsuss? Thank you!', '_blank');
     }
   }
 

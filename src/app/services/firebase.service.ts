@@ -327,7 +327,7 @@ export class FirebaseService {
     return this.listingCollection.doc(id).delete();
   }
 
-  removeDead(id) {
+  removeDeal(id) {
     return this.dealCollection.doc(id).delete();
   }
 

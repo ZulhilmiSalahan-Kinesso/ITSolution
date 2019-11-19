@@ -10,15 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class FinalDealPage implements OnInit {
 
-  private deal: Deal = {
-    Title: '',
-    From: '',
-    To: '',
-    Offer: 0,
-    Status: '',
-    ChangeDate: 0,
-    Description: ''
-  }
+  private deal: Deal = new Deal();
 
   constructor(
     private navCtrl: NavController,
@@ -27,7 +19,6 @@ export class FinalDealPage implements OnInit {
   ) {
     this.route.queryParams.subscribe(param => {
       this.deal = this.router.getCurrentNavigation().extras.state.Deal;
-      this.deal.ChangeDate = new Date().toLocaleString
     });
   }
 

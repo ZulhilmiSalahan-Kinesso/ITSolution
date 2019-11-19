@@ -59,7 +59,7 @@ export class ITServiceRequestPage implements OnInit {
 
   acceptDeal(deal: Deal) {
     deal.Status = 'Accepted';
-    deal.ChangeDate = new Date().toLocaleString();
+    deal.StartDate = new Date().toLocaleString();
     this.firebaseService.updateDeal(deal.Id, deal);
     this.toastService.presentToast('Deal Accepted');
 
@@ -74,7 +74,6 @@ export class ITServiceRequestPage implements OnInit {
 
    rejectDeal(deal: Deal) {
       deal.Status = 'Rejected';
-      deal.ChangeDate = new Date().toLocaleString();
       this.firebaseService.updateDeal(deal.Id, deal);
       this.toastService.presentToast('Deal Rejected');
 
@@ -93,16 +92,20 @@ export class ITServiceRequestPage implements OnInit {
 
   completeProject( deal: Deal ) {
     deal.Status = 'Completed';
-    deal.ChangeDate = new Date().toLocaleString();
+    deal.CompleteDate = new Date().toLocaleString();
     this.firebaseService.updateDeal(deal.Id, deal);
     this.toastService.presentToast('Deal Completed');
 
     const notification: Notification = {
       Title: 'Your Deal Is Completed',
-      Body: 'Your project ' + deal.Title + ' is completed',
+      Body: 'Your project ' + deal.Title + ' has completed',
       UserId: deal.From
     }
 
     this.messageService.sendNotificationByUserId(notification);
+  }
+
+  deleteProject( deal: Deal ) {
+    this.firebaseService.removeDeal(deal.Id);
   }
 }

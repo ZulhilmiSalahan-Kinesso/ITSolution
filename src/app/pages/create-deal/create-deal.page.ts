@@ -17,15 +17,7 @@ export class CreateDealPage implements OnInit {
 
   private selectedProvider: Provider;
 
-  private deal: Deal = {
-    Title: '',
-    Description: '',
-    Offer: 0,
-    From: '',
-    To: '',
-    Status: '',
-    ChangeDate: 0
-  };
+  private deal: Deal = new Deal();
 
   constructor(
     private navCtrl: NavController,
@@ -51,6 +43,7 @@ export class CreateDealPage implements OnInit {
 
   addDeal() {
     this.deal.Status = 'New';
+    this.deal.DateCreated = new Date().toLocaleString();
     this.firebaseService.addDeal(this.deal);
     this.toastService.presentToast('Successfully send deals');
     this.navCtrl.pop();

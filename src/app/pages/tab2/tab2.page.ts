@@ -100,12 +100,6 @@ export class Tab2Page implements OnInit {
             this.navCtrl.navigateForward('/itprovider');
           }
         }, {
-          text: 'Users',
-          icon: 'people',
-          handler: () => {
-            this.navCtrl.navigateForward('/users');
-          }
-        }, {
           text: 'Cancel',
           icon: 'close',
           role: 'cancel',
