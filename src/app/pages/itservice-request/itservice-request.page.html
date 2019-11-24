@@ -21,7 +21,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding *ngFor="let deal of filteredDeals">
+    <ion-item-sliding *ngFor="let deal of this.dealService.dealList">
       <ion-item>
         <ion-label>
           Title: {{deal.Title}} <br />
@@ -29,15 +29,15 @@
           Status : {{deal.Status}}
         </ion-label>
       </ion-item>
-      <ion-item class="ion-no-padding">
+      <ion-item class="ion-no-padding" *ngIf="deal.FreelancerId === currentUserId">
         <ion-grid class="ion-no-padding">
           <ion-row class="ion-no-padding">
-            <ion-col size="4" class="ion-no-padding"*ngIf="deal.Status!=='Completed'">
+            <ion-col size="4" class="ion-no-padding" *ngIf="deal.Status !== 'Completed' && deal.Status !== Accepted">
               <ion-button expand="full" size="default" (click)="acceptDeal(deal)">
                 Accept
               </ion-button>
             </ion-col>
-            <ion-col size="4" class="ion-no-padding"*ngIf="deal.Status==='Rejected' || deal.Status==='New'">
+            <ion-col size="4" class="ion-no-padding" *ngIf="deal.Status==='Rejected' || deal.Status==='New'">
               <ion-button expand="full" size="default" (click)="rejectDeal(deal)">
                 Reject
               </ion-button>
@@ -60,6 +60,23 @@
           </ion-row>
         </ion-grid>
       </ion-item>
+
+      <ion-item class="ion-no-padding" *ngIf="deal.HirerId === currentUserId && deal.Status==='Completed'">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-no-padding">
+              <ion-col size="4" class="ion-no-padding">
+                <ion-button expand="full" size="default" (click)="generateReceipt(deal)">
+                  Receipt
+                </ion-button>
+              </ion-col>
+              <ion-col size="4" class="ion-no-padding">
+                  <ion-button expand="full" size="default" (click)="deleteProject(deal)">
+                    Delete
+                  </ion-button>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
     </ion-item-sliding>
   </ion-list>
 

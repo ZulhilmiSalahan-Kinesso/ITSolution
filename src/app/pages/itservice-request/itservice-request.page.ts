@@ -4,7 +4,6 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { DealService } from 'src/app/services/deal.service';
 import { Deal } from 'src/app/models/deal';
 import { ToastService } from 'src/app/services/toast.service';
-import { element } from 'protractor';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { MessageService } from 'src/app/services/message.service';
@@ -18,6 +17,7 @@ import { Notification } from '../../models/notification';
 export class ITServiceRequestPage implements OnInit {
 
   private filteredDeals: Deal[];
+  private currentUserId: string;
 
   constructor(
     private messageService: MessageService,
@@ -36,13 +36,10 @@ export class ITServiceRequestPage implements OnInit {
 
   ionViewDidEnter() {
     this.filteredDeals = [];
-    this.dealService.dealList.forEach( element => {
-
-      console.log('Deal To : ' + element.To);
-      console.log('Current User : ' + this.authService.userDetails().uid);
-
-      if ( element.To === this.authService.userDetails().uid ) {
-        this.filteredDeals.push(element);
+    this.currentUserId = this.authService.userDetails().uid;
+    this.dealService.dealList.forEach( deal => {
+      if ( deal.FreelancerId === this.currentUserId  && deal.HirerId === this.currentUserId ) {
+        this.filteredDeals.push(deal);
       }
     });
   }
@@ -66,10 +63,12 @@ export class ITServiceRequestPage implements OnInit {
     const notification: Notification = {
       Title: 'Your Deal Is Acepted',
       Body: 'Your deal for project ' + deal.Title + ' is accpeted',
-      UserId: deal.From
+      UserId: deal.HirerId,
+      Status: 'New'
     }
 
     this.messageService.sendNotificationByUserId(notification);
+    this.firebaseService.addNotification(notification);
   }
 
    rejectDeal(deal: Deal) {
@@ -80,10 +79,12 @@ export class ITServiceRequestPage implements OnInit {
       const notification: Notification = {
         Title: 'Your Deal Is Rejected',
         Body: 'Your deal for project ' + deal.Title + ' is rejected',
-        UserId: deal.From
+        UserId: deal.HirerId,
+        Status: 'New'
       }
 
       this.messageService.sendNotificationByUserId(notification);
+      this.firebaseService.addNotification(notification);
    }
 
   back() {
@@ -99,10 +100,12 @@ export class ITServiceRequestPage implements OnInit {
     const notification: Notification = {
       Title: 'Your Deal Is Completed',
       Body: 'Your project ' + deal.Title + ' has completed',
-      UserId: deal.From
+      UserId: deal.HirerId,
+      Status: 'New'
     }
 
     this.messageService.sendNotificationByUserId(notification);
+    this.firebaseService.addNotification(notification);
   }
 
   deleteProject( deal: Deal ) {

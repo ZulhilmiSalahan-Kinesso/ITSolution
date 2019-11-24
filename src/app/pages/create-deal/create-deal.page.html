@@ -19,18 +19,32 @@
 <ion-content>
   <ion-item>
     <ion-label position="floating">
-      <ion-icon name="filing" item-start></ion-icon>
-      From
+      <ion-icon  name="filing" item-start></ion-icon>
+      HirerId
     </ion-label>
-    <ion-input color="secondary" type="text" [(ngModel)]="deal.From"></ion-input>
+    <ion-input disabled="true" color="secondary" type="text" [(ngModel)]="deal.HirerId"></ion-input>
   </ion-item>
+  <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="filing" item-start></ion-icon>
+        Hirer Name
+      </ion-label>
+      <ion-input disabled="true" color="secondary" type="text" [(ngModel)]="deal.HirerName"></ion-input>
+    </ion-item>
   <ion-item>
     <ion-label position="floating">
       <ion-icon name="filing" item-start></ion-icon>
-      To
+      FreelancerId
     </ion-label>
-    <ion-input color="secondary" type="text" [(ngModel)]="deal.To"></ion-input>
+    <ion-input disabled="true" color="secondary" type="text" [(ngModel)]="deal.FreelancerId"></ion-input>
   </ion-item>
+  <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="filing" item-start></ion-icon>
+        Freelancer Name
+      </ion-label>
+      <ion-input disabled="true" color="secondary" type="text" [(ngModel)]="deal.FreelancerName"></ion-input>
+    </ion-item>
   <ion-item>
     <ion-label position="floating">
       <ion-icon name="filing" item-start></ion-icon>
@@ -45,6 +59,7 @@
     </ion-label>
     <ion-input color="secondary" type="text" [(ngModel)]="deal.Description"></ion-input>
   </ion-item>
+  
   <ion-item>
     <ion-label position="floating">
       <ion-icon name="filing" item-start></ion-icon>
@@ -53,8 +68,8 @@
     <ion-input color="secondary" type="text" [(ngModel)]="deal.Offer"></ion-input>
   </ion-item>
 
-  <ion-tab-button (click)="addDeal()">
+  <ion-button expand="full" (click)="addDeal()">
     <ion-icon name="add"></ion-icon>
     <ion-label>Add</ion-label>
-  </ion-tab-button>
+  </ion-button>
 </ion-content>

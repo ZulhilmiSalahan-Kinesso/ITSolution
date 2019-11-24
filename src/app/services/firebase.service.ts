@@ -19,6 +19,7 @@ import { MessageService } from './message.service';
 import { Deal } from '../models/deal';
 import { DealService } from './deal.service';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ export class FirebaseService {
   public messages: Observable<Message[]>;
   public messagesArray: Message[];
 
+  public notificationCollection: AngularFirestoreCollection<Notification>;
+  public notifications: Observable<Notification[]>;
+  public notificationArray: Notification[];
+
   public dealCollection: AngularFirestoreCollection<Deal>;
   public deals: Observable<Deal[]>;
   public dealsArray: Deal[];
@@ -70,7 +75,8 @@ export class FirebaseService {
     private listingService: ListingService,
     private userService: UserService,
     private messageService: MessageService,
-    private dealService: DealService ) {
+    private dealService: DealService,
+    private notificationService: NotificationService ) {
 
     this.categoryCollection = this.db.collection('category');
     this.serviceCollection = this.db.collection('services');
@@ -80,6 +86,7 @@ export class FirebaseService {
     this.userCollection = this.db.collection('users');
     this.dealCollection = this.db.collection('deals');
     this.tokenCollection = this.db.collection('tokens');
+    this.notificationCollection = this.db.collection('notifications');
 
     /*
     this.usersDocument = this.db.collection( 'users' ).doc<MyUser>(this.userId);
@@ -93,6 +100,7 @@ export class FirebaseService {
     this.getUsersFromFirestore();
     this.getMessagesFromFirestore();
     this.getDealsFromFirestore();
+    this.getNotificationsFromFirestore();
   }
 
   async registerDeviceToken(userId) {
@@ -103,13 +111,14 @@ export class FirebaseService {
         Title: '',
         Body: '',
         Token: token
-      }
+      };
 
       this.userCollection.doc(userId).update({Token: token});
     }, err => {
       this.toastService.presentToast(err);
     });
   }
+
   // ##############################################################
   // Get Item From Firestore Collection
   // ##############################################################
@@ -175,6 +184,18 @@ export class FirebaseService {
 
   getMessagesFromFirestore() {
     this.messages = this.messageCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const Id = a.payload.doc.id;
+          return { Id, ...data };
+        });
+      })
+    );
+  }
+
+  getNotificationsFromFirestore() {
+    this.notifications = this.notificationCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -255,6 +276,16 @@ export class FirebaseService {
     });
   }
 
+  async getNotificationsArray() {
+    this.notifications.subscribe( res => {
+      this.notificationService.notificationList = res;
+      this.notificationService.notificationCount = res.length;
+      console.log('Get Notification Array');
+      console.log(res);
+      return this.notificationArray = res;
+    });
+  }
+
   // ##############################################################
   // Get Item From Local Collection
   // ##############################################################
@@ -273,6 +304,10 @@ export class FirebaseService {
 
   getUsers() {
     return this.users;
+  }
+
+  getNotifications() {
+    return this.notifications;
   }
 
   // ##############################################################
@@ -307,6 +342,10 @@ export class FirebaseService {
     return this.dealCollection.add(deal);
   }
 
+  addNotification(notification: Notification) {
+    return this.notificationCollection.add(notification);
+  }
+
   // ##############################################################
   // Remove Item From Collection
   // ##############################################################
@@ -329,6 +368,10 @@ export class FirebaseService {
 
   removeDeal(id) {
     return this.dealCollection.doc(id).delete();
+  }
+
+  removeNotification(id) {
+    return this.notificationCollection.doc(id).delete();
   }
 
   // ##############################################################
@@ -355,6 +398,10 @@ export class FirebaseService {
 
   updateDeal(id: string, deal: Deal) {
     this.dealCollection.doc(id).update(deal);
+  }
+
+  updateNotification( id: string, notification : Notification) {
+    this.notificationCollection.doc(id).update(notification);
   }
 
 

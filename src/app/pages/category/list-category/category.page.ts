@@ -6,6 +6,9 @@ import { ToastService } from 'src/app/services/toast.service';
 import { NavController } from '@ionic/angular';
 import { CategoryService } from 'src/app/services/category.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { red } from 'color-name';
 
 @Component({
   selector: 'app-category',
@@ -26,14 +29,17 @@ export class CategoryPage implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private categoryService: CategoryService,
+    private notificationService: NotificationService,
     private toastService: ToastService,
     private navCtrl: NavController,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
     this.firebaseService.getCategoriesArray();
     this.firebaseService.getServicesArray();
     this.firebaseService.getUsersArray();
     this.firebaseService.getListingsArray();
+    this.firebaseService.getNotificationsArray();
   }
 
   ngOnInit() {

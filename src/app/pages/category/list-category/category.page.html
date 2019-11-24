@@ -11,7 +11,7 @@
     <ion-buttons slot="end">
       <ion-button size="small" shape="round" color="medium" (click)="notifications()">
         <ion-icon name="notifications"></ion-icon>
-        <ion-badge color="dark" slot="end">2</ion-badge>
+        <ion-badge color="dark" slot="end">{{notificationCount}}</ion-badge>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -35,9 +35,11 @@
     </ion-item-sliding>
   </ion-list>
 
+  <!--
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addCategory()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  -->
 </ion-content>

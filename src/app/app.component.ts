@@ -23,12 +23,13 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
       this.firebaseService.getCategoriesArray();
       this.firebaseService.getServicesArray();
       this.firebaseService.getUsersArray();
       this.firebaseService.getListingsArray();
       this.firebaseService.getDealsArray();
+      this.firebaseService.getNotificationsArray();
+      this.splashScreen.hide();
     });
   }
 }
